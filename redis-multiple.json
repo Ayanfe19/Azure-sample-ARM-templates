@@ -1,0 +1,30 @@
+{
+   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+     "sqlCount": {
+       "type": "int",
+       "defaultValue": 2
+     }
+   },
+   "variables": {},
+   "resources": [
+ {
+    "name": "[concat(copyIndex(), 'sql', uniqueString(resourceGroup().id))]",
+    "type": "Microsoft.DBforMySQL/servers",
+    "apiVersion": "2017-12-01",
+    "location": "[resourceGroup().location]",
+    "properties": {
+       "administratorLogin": "ayanfe",
+       "administratorLoginPassword": "dumble_DORE12!",
+       "createMode": "Default"
+    },
+     "copy": {
+        "name": "sqlcopy",
+        "count": "[parameters('sqlCount')]"
+      }
+ }
+   ],
+   "outputs": {}
+ 
+ }
